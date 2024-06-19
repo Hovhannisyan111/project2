@@ -84,6 +84,29 @@ def game_over(stars, player, window):
             stars.remove(star)
     return False
 
+def play_again(window):
+    """
+    Function: play_again
+    Brief: asks the palyer if player want to play again
+    Params: window: the game window
+    Return: returns True if player want to play otherwise False
+    """
+    window.blit(background, (0,0))
+    message = font.render("Play again (y/n)", 2, "yellow")
+    window.blit(message, (width // 2 - message.get_width() // 2,height // 2 - message.get_height() // 2))
+    pygame.display.update()
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                exit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_y:
+                    return True
+                elif event.key == pygame.K_n:
+                    return False
+
 def main():
     """
     Function: main
@@ -124,6 +147,9 @@ def main():
 
         if game_over(stars, player, window):
             run = False
+            if play_again(window):
+                main()
+                return
 
         draw(player, direction, finish, stars, window)
 
