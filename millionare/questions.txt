@@ -1,0 +1,20 @@
+What is the capital of France?Paris,Moscow,Tbilisi,Gyumri
+What is the sum of 2 + 2?4,6,8,1
+Who wrote 'Romeo and Juliet'?William Shakespeare,Jane Austen,Charles Dickens,Emily Bronte
+What is the largest planet in our solar system?Jupiter,Venus,Mars,Saturn
+Which element has the chemical symbol 'O'?Oxygen,Gold,Silver,Iron
+In which year did World War II end?1945,1918,1939,1960
+What is the capital of Japan?Tokyo,Seoul,Beijing,Hanoi
+What is the square root of 144?12,8,16,10
+Who painted the Mona Lisa?Leonardo da Vinci,Vincent van Gogh,Pablo Picasso,Claude Monet
+What is the currency of Australia?Dollar,Yen,Euro,Pound
+How many continents are there on Earth?7,8,6,5
+Which is the largest ocean?Pacific,Indian,Southern,Atlantic
+Who is the author of 'The Old Man and the Sea'?Ernest Hemingway,Harper Lee,J.K. Rowling,George Orwell
+What is the speed of light?299.792,300.000,250.000,350.000
+What is the capital of Brazil?Brasilia,Buenos Aires,Lima,Santiago
+What is the largest country in the world?Russia,UK,Australia,Canada
+What is the largest desert in the world?Antarctic,Arabian,Sahara,Gobi
+What is the boiling point of water in Celsius?100,0,50,200
+Which planet is known as the Red Planet?Mars,Venus,Jupiter,Saturn
+Who is the current President of the United States?Joe Biden,Donald Trump,Barack Obama,George W.Bush

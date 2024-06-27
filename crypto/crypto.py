@@ -33,7 +33,7 @@ def create_widgets(root, state):
 def upload_file(state):
     """
     Function: upload_file
-    Brief: handle file upload and make content
+    Brief: handle file upload and update the label
     Parms: state: dict to store widget states
     """
     state["file_path"] = filedialog.askopenfilename(filetypes=[("Text Files", "*.txt")])
@@ -55,7 +55,7 @@ def save_file(state, root):
 
     excel_name = state["name_entry"].get()
     if not excel_name:
-        messagebox.showerror("Error", "Please enter a name of Excel file")
+        messagebox.showerror("Error", "Please enter a name for Excel file")
         return
 
     default_save_path = os.path.join(os.path.expanduser("~/Downloads"), f"{excel_name}.xlsx")
@@ -65,7 +65,7 @@ def save_file(state, root):
 
     try:
         save_data(save_path, state)
-        messagebox.showinfo("Done", f"Date saved to {save_path}")
+        messagebox.showinfo("Done", f"Data saved to {save_path}")
     except Exception as error:
         messagebox.showerror("Error", "Faild to save data {error}")
     root.destroy()
@@ -73,7 +73,7 @@ def save_file(state, root):
 def save_data(save_path, state):
     """
     Function: save_data
-    Brief: get data for url and save to Excel file
+    Brief: get data form api and save to Excel file
     Params: save_path: the path to save Excel file
             state: dict of widget states
     """
@@ -87,7 +87,7 @@ def save_data(save_path, state):
 
     workbook = xlsxwriter.Workbook(save_path)
     worksheet = workbook.add_worksheet()
-    headers = ["Name", "Symbol", "Current Price", "Market Cap", "Total Volume", "Price Cahnge for 24 hours"]
+    headers = ["Name", "Symbol", "Current Price", "Market Cap", "Total Volume", "Price Change for 24 hours"]
     bold = workbook.add_format({"bold": True})
     currency_format = workbook.add_format({'num_format': '$#,##0.00'})
 
@@ -116,7 +116,7 @@ def read_symbols(state):
     """
     with open(state["file_path"]) as file:
         symbols = file.read().split()
-    return [symbol.upper() for symbol in  symbols]
+    return [symbol.upper() for symbol in symbols]
 
 def get_data():
     """
@@ -125,12 +125,12 @@ def get_data():
     Return: list of crypto data
     """
     url = "https://api.coincap.io/v2/assets"
-    params = {"limit": 20}
+    params = {"limit": 30}
     try:
         response = requests.get(url, params=params)
         response.raise_for_status()
-    except requests.exceptions.RequestException as e:
-        raise Exception(f"Error fetching data from API: {e}")
+    except requests.exceptions.RequestException as error:
+        print(error)
 
     data = response.json()
     return data["data"]

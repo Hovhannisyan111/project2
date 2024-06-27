@@ -90,7 +90,7 @@ def write_file(content, output_file):
 def main():
     """
     Fuantion: main
-    Brief: Entery porint
+    Brief: Entery point
     """
     input_file, output_file = get_arguments()
     content = get_content(input_file)
