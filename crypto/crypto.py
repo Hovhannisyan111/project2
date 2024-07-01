@@ -84,28 +84,30 @@ def save_data(save_path, state):
 
     if not filtered_data:
         raise Exception("No data found")
+    try:
+        workbook = xlsxwriter.Workbook(save_path)
+        worksheet = workbook.add_worksheet()
+        headers = ["Name", "Symbol", "Current Price", "Market Cap", "Total Volume", "Price Change for 24 hours"]
+        bold = workbook.add_format({"bold": True})
+        currency_format = workbook.add_format({'num_format': '$#,##0.00'})
 
-    workbook = xlsxwriter.Workbook(save_path)
-    worksheet = workbook.add_worksheet()
-    headers = ["Name", "Symbol", "Current Price", "Market Cap", "Total Volume", "Price Change for 24 hours"]
-    bold = workbook.add_format({"bold": True})
-    currency_format = workbook.add_format({'num_format': '$#,##0.00'})
+        for col in range(len(headers)):
+            worksheet.write(0, col, headers[col], bold)
+            worksheet.set_column(col, col, 23)
 
-    for col in range(len(headers)):
-        worksheet.write(0, col, headers[col], bold)
-        worksheet.set_column(col, col, 23)
+        row = 1
+        for item in filtered_data:
+            worksheet.write(row, 0, item["name"])
+            worksheet.write(row, 1, item["symbol"])
+            worksheet.write_number(row, 2, float(item["priceUsd"]), currency_format)
+            worksheet.write_number(row, 3, float(item["marketCapUsd"]), currency_format)
+            worksheet.write_number(row, 4, float(item["volumeUsd24Hr"]), currency_format)
+            worksheet.write_number(row, 5, float(item["changePercent24Hr"]))
 
-    row = 1
-    for item in filtered_data:
-        worksheet.write(row, 0, item["name"])
-        worksheet.write(row, 1, item["symbol"])
-        worksheet.write_number(row, 2, float(item["priceUsd"]), currency_format)
-        worksheet.write_number(row, 3, float(item["marketCapUsd"]), currency_format)
-        worksheet.write_number(row, 4, float(item["volumeUsd24Hr"]), currency_format)
-        worksheet.write_number(row, 5, float(item["changePercent24Hr"]))
-
-        row += 1
-    workbook.close()
+            row += 1
+        workbook.close()
+    except xlsxwriter.exceptions.XlsxWriterError as error:
+        raise Exception(f"Error writing to Excel file: {error}")
 
 def read_symbols(state):
     """
@@ -142,7 +144,7 @@ def main():
     """
     root = tk.Tk()
     root.title("Crypto")
-    root.geometry("500x250")
+    root.geometry("500x300")
 
     state = {}
     create_widgets(root, state)
