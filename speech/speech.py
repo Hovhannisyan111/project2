@@ -27,8 +27,11 @@ def search_firefox(search_term):
     Brief: searching what I say in firefox
     Params: search_term: what I said
     """
-    url = f"https://www.google.com/search?q={search_term.replace(' ', '+')}"
-    webbrowser.open(url)
+    try:
+        url = f"https://www.google.com/search?q={search_term.replace(' ', '+')}"
+        webbrowser.open(url)
+    except webbrowser.Error as error:
+        print(f"An error occurred with the web browser: {error}")
 
 def create_file(file_name):
     """
